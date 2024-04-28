@@ -1,12 +1,21 @@
+// // ProjectItem.js
 import React from "react";
 
-function ProjectItem({ name, about, technologies }) {
+function ProjectItem({ project }) {
+  // Ensure project is defined before accessing its properties
+  const id = project ? project.id : null;
+  const name = project && project.name ? project.name : "Default Project Name";
+  const about = project && project.about ? project.about : "Default Project Description";
+  const technologies = project && project.technologies ? project.technologies : [];
+
   return (
-    <div className="project-item">
+    <div key={id} className="project-item">
       <h3>{name}</h3>
       <p>{about}</p>
       <div className="technologies">
-        {/* render a <span> for each technology in the technologies array */}
+        {technologies.map((tech, index) => (
+          <span key={index}>{tech}</span>
+        ))}
       </div>
     </div>
   );
